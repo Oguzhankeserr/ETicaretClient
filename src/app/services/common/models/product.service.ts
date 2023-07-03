@@ -4,7 +4,7 @@ import { Create_Product } from 'src/app/contratcs/create_product';
 import { HttpErrorResponse } from '@angular/common/http';
 import { List_Product } from 'src/app/contratcs/list.product';
 import { throwMatDuplicatedDrawerError } from '@angular/material/sidenav';
-import { Observable, firstValueFrom } from 'rxjs';
+import { Observable, first, firstValueFrom } from 'rxjs';
 import { List_Product_Image } from 'src/app/contratcs/list_product_image';
 
 @Injectable({
@@ -53,12 +53,23 @@ export class ProductService {
     await firstValueFrom(deleteObservable);
   }
 
-  async readImages(id: string): Promise<List_Product_Image[]>{
+  async readImages(id: string, successCallBack?: ()=> void): Promise<List_Product_Image[]>{
   const getObservable: Observable<List_Product_Image[]> = this.httpClientService.get<List_Product_Image[]>({
       action:"getproductimages",
       controller:"products"
     },id);
 
-    return await firstValueFrom(getObservable);
+    const images: List_Product_Image[] = await firstValueFrom(getObservable);
+    successCallBack();
+    return await images;
+  }
+  async deleteImage(id:string, imageId:string, successCallBack?: ()=> void){
+    const deleteObservable = this.httpClientService.delete({
+      action:"deleteproductimage",
+      controller:"products",
+      queryString:`imageId=${imageId}`
+    },id)
+    await firstValueFrom(deleteObservable);
+    successCallBack();
   }
 }
