@@ -37,6 +37,7 @@ export class SelectProductImageDialogComponent extends BaseDialog<SelectProductI
 
   images:List_Product_Image[];
   async ngOnInit() {
+    debugger
     this.spinner.show(SpinnerType.Ballatom);
     this.images =await this.productService.readImages(this.data as string, () => this.spinner.hide(SpinnerType.Ballatom));
   }

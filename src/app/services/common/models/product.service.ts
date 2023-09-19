@@ -54,6 +54,7 @@ export class ProductService {
   }
 
   async readImages(id: string, successCallBack?: ()=> void): Promise<List_Product_Image[]>{
+    debugger
   const getObservable: Observable<List_Product_Image[]> = this.httpClientService.get<List_Product_Image[]>({
       action:"getproductimages",
       controller:"products"
