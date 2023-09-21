@@ -1,6 +1,7 @@
 export class User{
-    adSoyad:string
-    kullaniciAdi:string
+    nameSurname:string
+    userName:string
     email:string
-    sifreTekrar:string
+    password:string
+    passwordConfirm:string
 }
