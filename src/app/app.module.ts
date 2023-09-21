@@ -13,6 +13,8 @@ import { DeleteDirective } from './directives/admin/delete.directive';
 import { DeleteDialogComponent } from './dialogs/delete-dialog/delete-dialog.component';
 import { FileUploadComponent } from './services/common/file-upload/file-upload.component';
 import { FileUploadModule } from './services/common/file-upload/file-upload.module';
+import { JwtModule } from '@auth0/angular-jwt';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 @NgModule({
   declarations: [
@@ -25,11 +27,19 @@ import { FileUploadModule } from './services/common/file-upload/file-upload.modu
     NgxSpinnerModule,
     HttpClientModule,
     AppRoutingModule,
-    FileUploadModule
+    FileUploadModule,
+    JwtModule.forRoot({
+      config:{
+        tokenGetter: ()=> localStorage.getItem("accessToken"),
+        allowedDomains:["localhost:7199"]
+      }
+    })
   ],
   providers: [
     {provide:"baseUrl",useValue: "https://localhost:7199/api",multi:true }
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas: [
+    CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule { }
