@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, UntypedFormBuilder, UntypedFormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { BaseComponent } from 'src/app/base/base.component';
 import { Create_User } from 'src/app/contratcs/users/create_user';
@@ -14,16 +14,17 @@ import { UserService } from 'src/app/services/common/models/user.service';
 })
 export class RegisterComponent extends BaseComponent implements OnInit {
 
-  constructor(private formBuilder: FormBuilder,
+  constructor(private formBuilder: UntypedFormBuilder,
     private userService: UserService,
     private toastrService: CustomToastrService,
     spinner:NgxSpinnerService) {
       super(spinner);
      }
 
-  frm: FormGroup;
-  ngOnInit(): void {
-    this.frm = this.formBuilder.group({
+     frm: UntypedFormGroup;
+
+     ngOnInit(): void {
+       this.frm = this.formBuilder.group({
       nameSurname: ["", [
         Validators.required,
         Validators.maxLength(50),
@@ -66,7 +67,7 @@ export class RegisterComponent extends BaseComponent implements OnInit {
 
     const result: Create_User = await this.userService.create(user);
     if (result.succeeded)
-      this.toastrService.message(result.message, "Kullanıcı kadı başarılı", {
+      this.toastrService.message(result.message, "Kullanıcı kaydı başarılı", {
         messageType: ToastrMessageType.Success,
         position: ToastrPosition.TopRight
       })
