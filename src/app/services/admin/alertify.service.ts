@@ -34,7 +34,7 @@ export class AlertifyOptions{
 export enum MessageType{
   Error = "error",
   Message = "message",
-  Notift = "notify",
+  Notify = "notify",
   Success = "success",
   Warning = "warning"
 }
