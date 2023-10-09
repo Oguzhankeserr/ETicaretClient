@@ -1,6 +1,7 @@
 import { SocialAuthService, SocialUser } from '@abacritt/angularx-social-login';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { error } from 'jquery';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { BaseComponent, SpinnerType } from 'src/app/base/base.component';
 import { TokenResponse } from 'src/app/contratcs/token/tokenResponse';
@@ -35,6 +36,8 @@ export class LoginComponent extends BaseComponent implements OnInit {
           })
           break;
       }
+    }, (error)=>{
+      console.error("AuthState Hatası:", error);
     });
   }
 

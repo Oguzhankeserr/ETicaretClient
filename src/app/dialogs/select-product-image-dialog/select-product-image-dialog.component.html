@@ -5,9 +5,9 @@
 
    <mat-card class="product-image-card"  *ngFor="let image of images">
     <mat-card-header>
-      
+      <input type="radio" name="img"  (click)="showCase(image.id)"/>
     </mat-card-header>
-    <img mat-card-image [src]="image.path">
+    <img mat-card-image [src]=" 'http://127.0.0.1:4200/' + image.fileName" alt="{{image.path}}">
     <mat-card-content>
      
     </mat-card-content>
