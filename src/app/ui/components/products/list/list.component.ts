@@ -1,9 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { provideClientHydration } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { BaseComponent, SpinnerType } from 'src/app/base/base.component';
+import { Create_Basket_Item } from 'src/app/contratcs/basket/create_basket_item';
 import { List_Product } from 'src/app/contratcs/list.product';
 import { List_Product_Image } from 'src/app/contratcs/list_product_image';
 import { BaseUrl } from 'src/app/contratcs/users/base_url';
+import { CustomToastrService, ToastrMessageType, ToastrPosition } from 'src/app/service/ui/custom-toastr.service';
+import { BasketService } from 'src/app/services/common/models/basket.service';
 import { FileService } from 'src/app/services/common/models/file.service';
 import { ProductService } from 'src/app/services/common/models/product.service';
 
@@ -12,11 +17,16 @@ import { ProductService } from 'src/app/services/common/models/product.service';
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.scss']
 })
-export class ListComponent implements OnInit {
+export class ListComponent extends BaseComponent implements OnInit {
 
   constructor(private productService: ProductService,
     private activatedRoute: ActivatedRoute,
-    private fileService:FileService) { }
+    private fileService:FileService,
+    private basketService: BasketService,
+    spinner: NgxSpinnerService,
+    private customToastrService:CustomToastrService) {
+      super(spinner)
+     }
 
   currentPageNo: number;
   totalProductCount: number;
@@ -82,18 +92,37 @@ export class ListComponent implements OnInit {
   }
 
 
-  getshowCaseProducts(): List_Product[] {
-    return this.products.filter(product => {
-      const showCaseImage = product.productImageFiles.find(img => img.showCase);
-      return showCaseImage !== undefined && showCaseImage.showCase;
-    });
+  async addToBasket(product:List_Product){
+    debugger
+    this.showSpinner(SpinnerType.Ballatom);
+    let _basketItem: Create_Basket_Item = new Create_Basket_Item();
+    _basketItem.productId = product.id;
+    _basketItem.quantity = 1;
+    await this.basketService.add(_basketItem);
+    this.hideSpinner(SpinnerType.Ballatom);
+    this.customToastrService.message("Ürün sepete eklenmiştir.", "Sepete Eklendi!",{
+      messageType:ToastrMessageType.Success,
+      position: ToastrPosition.TopRight
+    })
   }
+  
 
-  getshowCaseImageUrl(product: List_Product): string | undefined {
-    const showCaseImage = product.productImageFiles.find(img => img.showCase == true);
-    // Eğer bir showCase görseli varsa onun URL'sini döndür, yoksa ilk görselin URL'sini döndür
-    return showCaseImage ? `${'http://127.0.0.1:4200/'}/${showCaseImage.fileName}` : 
-      product.imagePath ? `${'http://127.0.0.1:4200/'}/${product.imagePath}` : undefined;
-  }
+
+
+
+  // getshowCaseProducts(): List_Product[] {
+  //   return this.products.filter(product => {
+  //     const showCaseImage = product.productImageFiles.find(img => img.showCase);
+  //     return showCaseImage !== undefined && showCaseImage.showCase;
+  //   });
+  // }
+
+  // getshowCaseImageUrl(product: List_Product): string | undefined {
+  //   const showCaseImage = product.productImageFiles.find(img => img.showCase == true);
+  //   // Eğer bir showCase görseli varsa onun URL'sini döndür, yoksa ilk görselin URL'sini döndür
+  //   return showCaseImage ? `${'http://127.0.0.1:4200/'}/${showCaseImage.fileName}` : 
+  //     product.imagePath ? `${'http://127.0.0.1:4200/'}/${product.imagePath}` : undefined;
+  // }
+
 
 }

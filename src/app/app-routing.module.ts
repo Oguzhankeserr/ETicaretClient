@@ -4,6 +4,7 @@ import { LayoutComponent } from './admin/layout/layout.component';
 import { DashboardComponent } from './admin/components/dashboard/dashboard.component';
 import { HomeComponent } from './ui/components/home/home.component';
 import { AuthGuard } from './guards/common/auth.guard';
+import { UiModule } from './ui/ui.module';
 
 const routes: Routes = [
   {
@@ -14,16 +15,16 @@ const routes: Routes = [
       { path: "orders", loadChildren: () => import("./admin/components/order/order.module").then(module => module.OrderModule), canActivate: [AuthGuard] },
     ], canActivate: [AuthGuard]
   },
-  {path:"",component:HomeComponent},
   {path:"basket",loadChildren: ()=> import("./ui/components/baskets/baskets.module").then(module=>module.BasketsModule)},
-  {path:"products",loadChildren: ()=> import("./ui/components/products/products.module").then(module=>module.ProductsModule)},
   {path:"products/:pageNo",loadChildren: ()=> import("./ui/components/products/products.module").then(module=>module.ProductsModule)},
+  {path:"products",loadChildren: ()=> import("./ui/components/products/products.module").then(module=>module.ProductsModule)},
   {path:"register",loadChildren: ()=> import("./ui/components/register/register.module").then(module=>module.RegisterModule)},
-  {path:"login",loadChildren: ()=> import("./ui/components/login/login.module").then(module=>module.LoginModule)}
+  {path:"login",loadChildren: ()=> import("./ui/components/login/login.module").then(module=>module.LoginModule)},
+  {path:"",component:HomeComponent}
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule,UiModule]
 })
 export class AppRoutingModule { }

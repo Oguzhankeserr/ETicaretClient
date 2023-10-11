@@ -18,19 +18,17 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { LoginComponent } from './ui/components/login/login.component';
 import { GoogleLoginProvider, GoogleSigninButtonModule, SocialAuthServiceConfig, SocialLoginModule } from '@abacritt/angularx-social-login';
 import { HttpErrorHandlerInterceptorService } from './services/common/http-error-handler-interceptor.service';
+import { UiModule } from './ui/ui.module';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    LoginComponent
-  ],
+  
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
     NgxSpinnerModule,
     HttpClientModule,
-    AppRoutingModule,
+    // UiModule,
     GoogleSigninButtonModule,
     FileUploadModule,
     JwtModule.forRoot({
@@ -39,7 +37,12 @@ import { HttpErrorHandlerInterceptorService } from './services/common/http-error
         allowedDomains:["localhost:7199"]
       }
     }),
-    SocialLoginModule
+    SocialLoginModule,
+    AppRoutingModule
+  ],
+  declarations: [
+    AppComponent,
+    LoginComponent
   ],
   providers: [
     {provide:"baseUrl",useValue: "https://localhost:7199/api",multi:true },

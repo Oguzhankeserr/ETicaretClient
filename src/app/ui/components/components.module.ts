@@ -16,11 +16,14 @@ import { LoginModule } from './login/login.module';
   ],
   imports: [
     CommonModule,
-    ProductsModule,
+    // ProductsModule,
     HomeModule,
-    BasketsModule,
+    // BasketsModule,
     RegisterModule
     // LoginModule
+  ],
+  exports: [
+    BasketsModule
   ]
 })
 export class ComponentsModule { }
