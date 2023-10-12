@@ -60,8 +60,9 @@
               <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
               <button class="btn btn-outline-success" type="submit">Search</button>
             </form> -->
-            <div  class="d-flex">
-              <button class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#exampleModal" type="submit">Sepet</button>
+            <div class="d-flex">
+              <button class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                (click)="loadComponent()" type="submit">Sepet</button>
             </div>
           </div>
         </div>
@@ -74,7 +75,13 @@
 <div class="row">
   <div class="col-md-1"></div>
   <div class="col-md-10">
-    <app-baskets></app-baskets>
+    <!-- <app-baskets></app-baskets> -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-xl">
+        <ng-template appDynamicLoadComponent></ng-template>
+      </div>
+    </div>
+
     <router-outlet></router-outlet>
   </div>
   <div class="col-md-1"></div>

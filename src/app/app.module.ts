@@ -19,6 +19,7 @@ import { LoginComponent } from './ui/components/login/login.component';
 import { GoogleLoginProvider, GoogleSigninButtonModule, SocialAuthServiceConfig, SocialLoginModule } from '@abacritt/angularx-social-login';
 import { HttpErrorHandlerInterceptorService } from './services/common/http-error-handler-interceptor.service';
 import { UiModule } from './ui/ui.module';
+import { DynamicLoadComponentDirective } from './directives/common/dynamic-load-component.directive';
 
 @NgModule({
   
@@ -42,10 +43,12 @@ import { UiModule } from './ui/ui.module';
   ],
   declarations: [
     AppComponent,
-    LoginComponent
+    LoginComponent,
+    DynamicLoadComponentDirective
   ],
   providers: [
     {provide:"baseUrl",useValue: "https://localhost:7199/api",multi:true },
+    {provide: "baseSignalRUrl", useValue:  "https://localhost:7199/",multi:true },
     {
       provide: "SocialAuthServiceConfig",
       useValue: {

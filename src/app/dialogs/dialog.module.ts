@@ -8,6 +8,7 @@ import { FileUploadModule } from '../services/common/file-upload/file-upload.mod
 import { SelectProductImageDialogComponent } from './select-product-image-dialog/select-product-image-dialog.component';
 import {MatCardModule} from '@angular/material/card';
 import { FormsModule } from '@angular/forms';
+import { BasketItemRemoveDialogComponent } from './basket-item-remove-dialog/basket-item-remove-dialog.component';
 
 
 
@@ -15,6 +16,7 @@ import { FormsModule } from '@angular/forms';
   declarations: [
     DeleteDialogComponent,
     SelectProductImageDialogComponent,
+    BasketItemRemoveDialogComponent,
     
   ],
   imports: [
