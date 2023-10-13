@@ -4,7 +4,7 @@ import { ProductsModule } from './products/products.module';
 import { OrderModule } from './order/order.module';
 import { CustomerModule } from './customer/customer.module';
 import { DashboardModule } from './dashboard/dashboard.module';
-import { FileUploadModule } from 'src/app/services/common/file-upload/file-upload.module';
+import { DeleteDirectiveModule } from 'src/app/directives/admin/delete.directive.module';
 
 
 
@@ -15,7 +15,8 @@ import { FileUploadModule } from 'src/app/services/common/file-upload/file-uploa
     ProductsModule,
     OrderModule,
     CustomerModule,
-    DashboardModule
+    DashboardModule,
+    DeleteDirectiveModule
   ]
 })
 export class ComponentsModule { }

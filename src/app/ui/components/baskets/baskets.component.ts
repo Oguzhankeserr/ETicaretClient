@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { BaseComponent, SpinnerType } from 'src/app/base/base.component';
-import { Create_Order } from 'src/app/constants/order/create_order';
+import { Create_Order } from 'src/app/contratcs/order/create_order';
 import { List_Basket_Item } from 'src/app/contratcs/basket/list_basket_item';
 import { Update_Basket_Item } from 'src/app/contratcs/basket/update_basket_item';
 import { BasketItemDeleteState, BasketItemRemoveDialogComponent } from 'src/app/dialogs/basket-item-remove-dialog/basket-item-remove-dialog.component';
@@ -72,7 +72,7 @@ export class BasketsComponent extends BaseComponent implements OnInit {
         this.showSpinner(SpinnerType.Ballatom);
         const order: Create_Order = new Create_Order();
         order.address = "Kültür";
-        order.description = "Falan gereksiz..";
+        order.description = "Falan Gereksiz..";
         await this.orderService.create(order);
         this.hideSpinner(SpinnerType.Ballatom);
         this.toastrService.message("Sipariş alınmıştır!", "Sipariş Oluşturuldu!", {
